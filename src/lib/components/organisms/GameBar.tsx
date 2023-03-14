@@ -1,4 +1,4 @@
-export default function GameBar() {
+export default function GameBar({ props: Blackjack }) {
 	return (
 		<div className="fixed bottom-0 left-0 w-full h-24 bg-black/50 flex justify-center items-center">
 			<button
