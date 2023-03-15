@@ -1,4 +1,4 @@
-export type Card = {
+export type CardType = {
   name: string,
   value: number,
   image: string
@@ -11,4 +11,9 @@ export type As = {
   }
   image: string
 }
-export type Deck = (Card|As)[]
+export type Deck = (CardType|As)[]
+
+export type Chip = {
+  value: number,
+  image: string;
+}

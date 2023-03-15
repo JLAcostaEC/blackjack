@@ -1,0 +1,9 @@
+#card-wrapper:not(:first-child) {
+	margin-left: -25%;
+}
+#card-wrapper:nth-last-child(8) ~ #card-wrapper {
+	margin-left: -28.5%;
+}
+#card-wrapper:hover + #card-wrapper {
+	margin-left: 0%;
+}

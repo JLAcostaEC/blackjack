@@ -1,5 +1,5 @@
 // Better way to get the real Viewport Height in mobile devices
-export default async function fixMobileHeight() {
+export default async function fixViewportHeight() {
   
   // Get current Height and set it to the CSS var: --vh
   let vh = window.innerHeight * 0.01

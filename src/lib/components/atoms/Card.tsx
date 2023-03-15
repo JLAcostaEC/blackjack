@@ -1,3 +1,4 @@
+import './Card.css'
 
 type props = {
   src: string
@@ -5,6 +6,8 @@ type props = {
 
 export default function Card(props: props) {
   return (
-    <img src={props.src || '/'} className="w-1/2"/>
+    <div id="card-wrapper" className='transition-all'>
+      <img src={props.src || '/'} className="w-28"/>
+    </div>
   )
 }
