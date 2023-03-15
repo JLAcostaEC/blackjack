@@ -1,18 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 import Bars3CenterLeftIcon from "@heroicons/react/24/outline/Bars3CenterLeftIcon.js";
 import ChevronDownIcon from "@heroicons/react/24/outline/ChevronDownIcon.js";
+import MenuToggle from "../atoms/MenuToggle";
 
 export default function Header() {
 	const [open, setOpen] = useState(false);
 	const [dropdown, setDropdown] = useState(false);
 
 	return (
-		<header className="sticky top-0 w-full">
+		<header className="sticky top-0 w-full z-50">
 			<nav className="p-2 py-4 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
 				<div className="container flex flex-wrap justify-between items-center mx-auto">
-					<Link to="#" className="flex items-center">
+					<a href="#" className="flex items-center">
 						<img
 							src="/images/Logo.png"
 							className="mr-3 h-8 sm:h-10"
@@ -21,17 +21,8 @@ export default function Header() {
 						<span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
 							BlackJApp
 						</span>
-					</Link>
-					<button
-						type="button"
-						className="inline-flex justify-center items-center ml-3 text-gray-400 rounded-lg md:hidden hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-500"
-						onClick={() => setOpen(!open)}
-					>
-						<span className="sr-only">Open main menu</span>
-						<span className="w-7 stroke-black -scale-x-100">
-							<Bars3CenterLeftIcon className="stroke-black" />
-						</span>
-					</button>
+					</a>
+					<MenuToggle onClick={() => setOpen(!open)}/>
 					<div
 						className={`${
 							open
@@ -42,13 +33,13 @@ export default function Header() {
 					>
 						<ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
 							<li>
-								<Link
-									to="/app"
+								<a
+									href="#"
 									className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent"
 									aria-current="page"
 								>
 									Play
-								</Link>
+								</a>
 							</li>
 							<li className="relative">
 								<button

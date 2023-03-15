@@ -1,0 +1,15 @@
+#card-wrapper:not(:first-child) {
+	margin-left: -25%;
+}
+#card-wrapper:nth-last-child(8) ~ #card-wrapper {
+	margin-left: -28.5%;
+}
+#card-wrapper:hover + #card-wrapper {
+	margin-left: 0%;
+}
+#card-wrapper img{
+	transition: transform 0.6s ease-in-out;
+}
+#card-wrapper.hidden img{
+	transform: translate( 300px, -600px ) rotate(360deg);
+}

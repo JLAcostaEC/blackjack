@@ -1,4 +1,4 @@
-import Card from "../atoms/Card"
+import Card from "../atoms/Card/Card"
 
 type props = {
   cards: []

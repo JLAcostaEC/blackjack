@@ -1,13 +1,15 @@
 import sample from 'underscore/modules/sample'
-import { Card } from '../types/types';
+import { Card } from '../types';
+import { Chip } from "../types";
 
-const TYPES: string[] = ['C', 'D', 'H', 'S'],
-  SPECIALS: string[] = ['A', 'J', 'Q', 'K'];
 
-const cards: Card[] = [];
 
 /** Return 52 cards in an array to initialize BlackJack Game */
 export const createCards = () => {
+  const TYPES: string[] = ['C', 'D', 'H', 'S'],
+    SPECIALS: string[] = ['A', 'J', 'Q', 'K'];
+  const cards: Card[] = [];
+
   for (let i = 2; i <= 10; i++) {
     for (const type of TYPES) {
       const card: Card = {
@@ -28,7 +30,7 @@ export const createCards = () => {
           image: '/images/cards/' + special + type + '.png',
           name: special + type
         }
-      }else{
+      } else {
         card = {
           value: 10,
           image: '/images/cards/' + special + type + '.png',
@@ -42,9 +44,14 @@ export const createCards = () => {
   return cards
 }
 
-
-
-export const getCard = (deck: string[]) => {
+//** Return a random card from deck array */
+export const getCard = (deck: Card[]) => {
   return sample(deck)
 }
 
+export function registerChips() {
+  const chips: Chip[] = [];
+  const chipList = [10, 50, 100, 500]
+  chipList.forEach(item => chips.push({ value: item, image: '/images/chips/' + item + '.png' }))
+  return chips
+}

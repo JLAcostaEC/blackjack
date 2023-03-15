@@ -1,6 +1,6 @@
 import { shuffle } from 'underscore'
-import { Card } from '../types/types';
-import { createCards } from "./GameFunctions";
+import { Card } from '../types';
+import { createCards, getCard } from "./GameFunctions";
 
 /** Generate the game deck and deal each card on demand */
 class Deck {
@@ -21,14 +21,14 @@ class Deck {
 
   /** Get one card of the deck */
   deal() {
-    return this.cards.pop() as Card;
+    return getCard(this.cards);
   }
 }
 
 /** Player Class - Can be used for a real Player or for the IA Dealer */
 class Player {
   hand: Card[] = [];
-  bank = 0;
+  bank: number = localStorage.getItem('BJAPPBank') ? parseInt(localStorage.getItem('BJAPPBank')!) : 1000
   chips = 0;
 
   /** Return current score of player calculating all cards in hand */
@@ -54,7 +54,7 @@ class Player {
   }
 }
 
-export class BlackjApp {
+export class BlackJApp {
   deck: Deck = new Deck();
   player: Player = new Player();
   dealer: Player = new Player();
@@ -65,6 +65,7 @@ export class BlackjApp {
     this.deck.shuffleDeck();
     this.player.hand = [this.deck.deal(), this.deck.deal()];
     this.dealer.hand = [this.deck.deal(), this.deck.deal()];
+    this.dealer.hand[0].isHidden = true
   }
 
   /** Request one card to dealer for the player or the dealer itself */
@@ -83,10 +84,17 @@ export class BlackjApp {
     if (amount <= this.player.bank) {
       this.currentBet += amount;
       this.player.bank -= amount;
+      localStorage.setItem('BJAPPBank', this.player.bank.toString())
       console.log(`Apuesta actual: ${this.currentBet}. Banco actual: ${this.player.bank}`);
     } else {
       console.log(`No tienes suficientes fondos para hacer una apuesta de ${amount}`);
     }
+  }
+
+  resetBet() {
+    this.player.bank += this.currentBet
+    this.currentBet = 0
+    localStorage.setItem('BJAPPBank', this.player.bank.toString())
   }
 
   getWinner() {
@@ -98,7 +106,7 @@ export class BlackjApp {
       return 'player';
     } else if (playerScore > dealerScore) {
       return 'player';
-    } else if(playerScore == dealerScore){
+    } else if (playerScore == dealerScore) {
       return 'push';
     }
   }
@@ -107,6 +115,7 @@ export class BlackjApp {
     const winner = this.getWinner();
     if (winner === 'player') {
       this.player.bank += this.player.chips * 2;
+      localStorage.setItem('BJAPPBank', this.player.bank.toString())
     } else if (winner === 'dealer') {
       this.player.bank -= this.player.chips;
     } else {
@@ -117,13 +126,14 @@ export class BlackjApp {
   }
 
   play(amount: number) {
+    localStorage.setItem('BJAPPBank', this.player.bank.toString())
     this.placeBet(amount);
     this.start();
-    while (this.player.makeMove(this.dealer.hand[0]) === 'hit') {
-      this.hit();
-    }
-    this.stand();
-    this.payout();
-    return this.getWinner();
+    // while (this.player.makeMove(this.dealer.hand[0]) === 'hit') {
+    //   this.hit();
+    // }
+    // this.stand();
+    // this.payout();
+    // return this.getWinner();
   }
 }
