@@ -10,10 +10,10 @@ export default function CardsHolder({
 
 	return (
 		<div
-			className={`flex items-start ${
-				!childrens?.length &&
-				"w-28 h-44 border-emerald-700 border-4 rounded-lg border-dashed"
-			} ${className}`}
+			className={`cards-holder flex items-start${
+				!childrens?.length ?
+				" w-28 h-44 border-emerald-700 border-4 rounded-lg border-dashed " : ''
+			}${className ? className : ''}`}
 		>
 			{childrens}
 		</div>

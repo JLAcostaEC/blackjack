@@ -15,10 +15,10 @@ interface props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export default function Chips({ game, setGame }: props) {
-	const [chips, setChips] = useState(registerChips());
-
-	if (game.data.player.bank < 500) {
-		chips.filter((item) => item.value <= game.data.player.bank);
+	let chips = registerChips();
+	if (game.data.player.bank <= 500) {
+		chips = chips.filter((item) => item.value <= game.data.player.bank)
+		console.log(chips, chips.filter((item) => item.value <= game.data.player.bank))
 	}
 	return (
 		<>
@@ -29,7 +29,7 @@ export default function Chips({ game, setGame }: props) {
 						game.data.placeBet(item.value);
 						setGame({ ...game });
 					}}
-					className="w-[calc(50%-8px)]"
+					className="w-[calc(100%/3-11px)]"
 				>
 					<img src={item.image} alt={`${item.value} Chip`} />
 				</div>

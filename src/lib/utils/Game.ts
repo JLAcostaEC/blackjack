@@ -125,9 +125,9 @@ export class BlackJApp {
     this.player.chips = 0;
   }
 
-  play(amount: number) {
+  play() {
     localStorage.setItem('BJAPPBank', this.player.bank.toString())
-    this.placeBet(amount);
+    this.placeBet(this.currentBet);
     this.start();
     // while (this.player.makeMove(this.dealer.hand[0]) === 'hit') {
     //   this.hit();

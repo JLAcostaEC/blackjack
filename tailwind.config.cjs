@@ -10,7 +10,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				blue: {
+				primary: {
 					50: "#fcf3f3",
 					100: "#f9e8e8",
 					200: "#efc5c5",
@@ -23,6 +23,9 @@ module.exports = {
 					900: "#5d0c0b",
 				},
 			},
+			screens:{
+				xs: '380px'
+			}
 		},
 	},
 	// eslint-disable-next-line no-undef

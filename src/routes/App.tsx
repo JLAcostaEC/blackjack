@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Card from "$lib/components/atoms/Card/Card";
 import { BlackJApp } from "$lib/utils/Game";
-import Table from "../lib/components/atoms/Table";
-import CardsHolder from "../lib/components/atoms/CardsHolder";
-import Modal from "../lib/components/molecules/Modal";
-import Button from "../lib/components/atoms/Button";
-import Chips from "../lib/components/atoms/Chips";
+import Table from "$lib/components/atoms/Table/Table";
+import CardsHolder from "$lib/components/atoms/CardsHolder";
+import Modal from "$lib/components/molecules/Modal";
+import Button from "$lib/components/atoms/Button";
+import Chips from "$lib/components/atoms/Chips";
+import GameBar from "../lib/components/molecules/GameBar";
 
 /** Entry file for  */
 function App() {
@@ -13,21 +14,22 @@ function App() {
 	const [showWelcome, setShowWelcome] = useState(true);
 	const [showGameConfig, setShowGameConfig] = useState(true);
 
+	
 	return (
 		<>
 			{showWelcome && (
 				<Modal toggleVisibility={setShowWelcome}>
 					<div className="flex justify-between mb-4 rounded-t sm:mb-5">
 						<div className="text-lg text-gray-900 text-left md:text-xl dark:text-white">
-							<h3 className="font-bold text-2xl mb-4">
+							<h3 className="font-bold text-xl mb-4">
 								Welcome to BlackJApp!
 							</h3>
-							<p className="mb-6">
+							<p className="mb-6 text-base">
 								BlackJApp is a basic App to show you my skills
 								using React JS. The name of the app is a pun
 								between BlackJack, App & Jorge Acosta, the
 								result Black
-								<span className="font-bold text-blue-500">
+								<span className="font-bold text-primary-500">
 									JA
 								</span>
 								<span className="font-bold">pp</span>. I hope
@@ -70,9 +72,10 @@ function App() {
 									Reset Bet
 								</Button>
 								<Button
-									onClick={() =>
-										setShowGameConfig(!showGameConfig)
-									}
+									onClick={() => {
+										setShowGameConfig(!showGameConfig);
+										Game.data.play();
+									}}
 								>
 									Start the Game
 								</Button>
@@ -81,7 +84,7 @@ function App() {
 					</div>
 				</Modal>
 			)}
-			<div className="flex w-full h-[calc(var(--vh)*100-64px)] justify-center items-center bg-black/30 z-0">
+			<div className="flex flex-col w-full h-[calc(var(--vh)*100-64px)] min-h-screen justify-center items-center bg-black/30">
 				<Table>
 					<CardsHolder className="">
 						{Game.data.dealer.hand.map((item) => (
@@ -92,7 +95,7 @@ function App() {
 										: item.image
 								}
 								key={item.name}
-								className="hidden"
+								className=""
 							></Card>
 						))}
 					</CardsHolder>
@@ -102,6 +105,9 @@ function App() {
 						))}
 					</CardsHolder>
 				</Table>
+				<GameBar>
+					<Button>Hello</Button>
+				</GameBar>
 			</div>
 		</>
 	);
